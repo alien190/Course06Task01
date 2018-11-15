@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
+                    .setTheme(R.style.AppTheme_Auth)
+                    .setLogo(R.drawable.hello)
                     .build(), RC_SIGN_IN);
         } else {
             startSecondActivity();
@@ -45,21 +48,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
             if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 startSecondActivity();
-                // ...
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
+                Toast.makeText(this, R.string.auth_error, Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     private void startSecondActivity() {

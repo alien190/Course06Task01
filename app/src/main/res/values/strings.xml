@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Course06Task01</string>
+    <string name="logout">Logout</string>
+    <string name="auth_error">Ошибка аутентификации</string>
 </resources>
