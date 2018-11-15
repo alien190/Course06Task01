@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "530701737203",
+    "firebase_url": "https://samplefirebaseproject-ec716.firebaseio.com",
+    "project_id": "samplefirebaseproject-ec716",
+    "storage_bucket": "samplefirebaseproject-ec716.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530701737203:android:b61402b957473fbd",
+        "android_client_info": {
+          "package_name": "com.example.alien.course06task01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530701737203-34tkm3gnklbbkijch4egiobkocg7tn31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYqBeKXtD7Dl0in7_eyMWgIQy12fQU1rA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
