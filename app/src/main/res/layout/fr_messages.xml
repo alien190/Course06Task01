@@ -48,8 +48,12 @@
             android:background="@drawable/edit_text_background"
             android:gravity="start"
             android:padding="@dimen/padding"
-            android:inputType="text"
-            tools:text="sample message sample message message 111 sdjfhdsk dsajklasdfjal lajdlasjdal  lajdsasljd  lasdjsaljdal " />
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:minLines="3"
+            android:maxLines="5"
+            tools:text="sample message sample message message 111 sdjfhdsk dsajklasdfjal lajdlasjdal  lajdsasljd  lasdjsaljdal "
+            android:scrollbars="vertical"/>
 
 
         <ImageButton
@@ -58,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginLeft="@dimen/li_margin"
-            android:background="@color/colorWhite"
+            android:background="@color/colorFullOpacity"
             android:src="@drawable/ic_send"
             app:layout_constraintHorizontal_weight="1" />
     </LinearLayout>

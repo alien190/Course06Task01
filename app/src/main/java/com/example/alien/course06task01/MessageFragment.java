@@ -14,11 +14,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+
+import java.util.regex.Pattern;
+
+import javax.annotation.RegEx;
 
 public class MessageFragment extends Fragment {
 
@@ -74,16 +77,31 @@ public class MessageFragment extends Fragment {
 
     private void onSend(View view) {
         String message = mMessageEditText.getText().toString();
-        if (!message.isEmpty()) {
+        if (!isMessageCorrect(message)) {
             mMessageEditText.setText("");
             hideKeyboard();
             sendMessage(message);
         }
     }
 
+    private boolean isMessageCorrect(String message) {
+        Pattern spacePattern = Pattern.compile("^ *$");
+        if (message.isEmpty()) {
+            showMessageTextError(getString(R.string.message_error_empty_text));
+            return false;
+        } else if (spacePattern.matcher(message).matches()) {
+            showMessageTextError(getString(R.string.message_error_space_text));
+        }
+        return true;
+    }
+
+    private void showMessageTextError(String error) {
+        mMessageEditText.setError(error);
+    }
+
     private void sendMessage(String message) {
         mDatabase.collection("messages")
-                .add(new Message(message, mUser.getUid()))
+                .add(new Message(message, mUser.getDisplayName()))
                 .addOnSuccessListener(d -> Log.d(TAG, "sendMessage: successful"))
                 .addOnFailureListener(e -> Log.d(TAG, "sendMessage: failure"));
     }

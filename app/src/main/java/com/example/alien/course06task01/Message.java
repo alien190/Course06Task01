@@ -8,11 +8,11 @@ public class Message {
     private String mText;
     @ServerTimestamp
     Date time;
-    private String mUserUid;
+    private String mUsername;
 
-    public Message(String text, String userUid) {
+    public Message(String text, String username) {
         mText = text;
-        mUserUid = userUid;
+        mUsername = username;
     }
 
     public String getText() {
@@ -23,11 +23,11 @@ public class Message {
         mText = text;
     }
 
-    public String getUserUid() {
-        return mUserUid;
+    public String getUsername() {
+        return mUsername;
     }
 
-    public void setUserUid(String userUid) {
-        mUserUid = userUid;
+    public void setUsername(String username) {
+        mUsername = username;
     }
 }

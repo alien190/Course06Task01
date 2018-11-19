@@ -4,4 +4,6 @@
     <string name="auth_error">Ошибка аутентификации</string>
     <string name="no_messages">сообщений нет</string>
     <string name="error_view_msg">Что-то пошло не так. Попробуйте еще раз.</string>
+    <string name="message_error_empty_text">Текс сообщения не может быть пустым</string>
+    <string name="message_error_space_text">Текс сообщения не может состоять только из пробелов</string>
 </resources>
