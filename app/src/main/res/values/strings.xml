@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Course06Task01</string>
+    <string name="app_name">Course06Task02</string>
     <string name="logout">Logout</string>
     <string name="auth_error">Ошибка аутентификации</string>
+    <string name="no_messages">сообщений нет</string>
+    <string name="error_view_msg">Что-то пошло не так. Попробуйте еще раз.</string>
 </resources>
