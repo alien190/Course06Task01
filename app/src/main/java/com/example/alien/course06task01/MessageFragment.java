@@ -77,7 +77,7 @@ public class MessageFragment extends Fragment {
 
     private void onSend(View view) {
         String message = mMessageEditText.getText().toString();
-        if (!isMessageCorrect(message)) {
+        if (isMessageCorrect(message)) {
             mMessageEditText.setText("");
             hideKeyboard();
             sendMessage(message);
@@ -91,6 +91,7 @@ public class MessageFragment extends Fragment {
             return false;
         } else if (spacePattern.matcher(message).matches()) {
             showMessageTextError(getString(R.string.message_error_space_text));
+            return false;
         }
         return true;
     }
@@ -102,8 +103,8 @@ public class MessageFragment extends Fragment {
     private void sendMessage(String message) {
         mDatabase.collection("messages")
                 .add(new Message(message, mUser.getDisplayName()))
-                .addOnSuccessListener(d -> Log.d(TAG, "sendMessage: successful"))
-                .addOnFailureListener(e -> Log.d(TAG, "sendMessage: failure"));
+                .addOnSuccessListener(d -> Log.d(TAG, "sendMessage: successful, text:" + message))
+                .addOnFailureListener(e -> Log.d(TAG, "sendMessage: failure, error:" + e.getMessage()));
     }
 
     private void hideKeyboard() {

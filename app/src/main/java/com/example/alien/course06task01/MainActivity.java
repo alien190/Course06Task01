@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 startSecondActivity();
             } else {
                 Toast.makeText(this, R.string.auth_error, Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
