@@ -16,16 +16,18 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.regex.Pattern;
 
-import javax.annotation.RegEx;
 
 public class MessageFragment extends Fragment {
 
-    private static final String TAG = "MessageFragment";
+    private static final String TAG = "MessageFragmentTAG";
 
     private FirebaseFirestore mDatabase;
     private ImageButton mSendImageButton;
@@ -51,8 +53,32 @@ public class MessageFragment extends Fragment {
             initFirestore();
             mSendImageButton = mView.findViewById(R.id.bt_send);
             mMessageEditText = mView.findViewById(R.id.et_message);
+            initListener();
         }
         return mView;
+    }
+
+    private void initListener() {
+        mDatabase.collection("messages").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = queryDocumentSnapshots != null && queryDocumentSnapshots.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (queryDocumentSnapshots != null && !queryDocumentSnapshots.isEmpty()) {
+                    Log.d(TAG, source + " data: " + queryDocumentSnapshots.getDocuments());
+                    Log.d(TAG, source + " data changes: " + queryDocumentSnapshots.getDocumentChanges().get(0).getDocument());
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+
+        });
     }
 
     private void initFirestore() {
